@@ -1,14 +1,10 @@
 import { ContainerModule } from 'inversify';
-import { ConnectionHandler, JsonRpcConnectionHandler } from "@theia/core/lib/common";
-import { WorkspaceServer, workspacePath } from '../common';
-import { DefaultWorkspaceServer } from './default-workspace-server';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common';
+import { MyService, MyServicePath } from '../common';
+import { MyServiceImpl } from './my-service-impl';
 
 export default new ContainerModule(bind => {
-	bind(DefaultWorkspaceServer).toSelf().inSingletonScope();
-    bind(WorkspaceServer).toService(DefaultWorkspaceServer);
-    bind(ConnectionHandler).toDynamicValue(ctx =>
-        new JsonRpcConnectionHandler(workspacePath, () => {
-        	ctx.container.get(WorkspaceServer)
-        })
-    ).inSingletonScope()
+    bind(MyServiceImpl).toSelf().inSingletonScope();
+    bind(MyService).toService(MyServiceImpl);
+    bind(ConnectionHandler).toDynamicValue(context => new JsonRpcConnectionHandler(MyServicePath, () => context.container.get(MyService))).inSingletonScope();
 });

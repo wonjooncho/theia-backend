@@ -1,2 +1,2 @@
-export * from './default-workspace-server';
+export * from './my-service-impl';
 export * from './hello-server.module';
