@@ -19,8 +19,10 @@ export class HelloWorldExtensionCommandContribution implements CommandContributi
     registerCommands(registry: CommandRegistry): void {
         registry.registerCommand(HelloWorldExtensionCommand, {
             execute: async () => {
-                const env = await this.myService.getEnvVariables();
-                this.messageService.info('Environment variables from the server: ' + JSON.stringify(env));
+                //const env = await this.myService.getEnvVariables();
+                //this.messageService.info('Environment variables from the server: ' + JSON.stringify(env));
+                const setting = await this.myService.getSettingValue();
+                this.messageService.info(setting);
             }
         });
     }
