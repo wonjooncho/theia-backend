@@ -22,7 +22,7 @@ export class HelloWorldExtensionCommandContribution implements CommandContributi
                 //const env = await this.myService.getEnvVariables();
                 //this.messageService.info('Environment variables from the server: ' + JSON.stringify(env));
                 const setting = await this.myService.getSettingValue();
-                this.messageService.info(setting);
+                this.messageService.info(JSON.stringify(setting));
             }
         });
     }
